@@ -50,6 +50,7 @@ void c2t_hccs_shadowRiftBoss();
 void c2t_hccs_freeRestCheck();
 boolean c2t_hccs_unlockGuildMoxie();
 boolean c2t_hccs_unlockDistantWoods();
+boolean c2t_hccs_getPyramidPower();
 
 
 void main() {
@@ -1766,6 +1767,10 @@ boolean c2t_hccs_preWeapon() {
 	if (c2t_hccs_thresholdMet(TEST_WEAPON))
 		return true;
 
+	//pyramid power
+	if (c2t_hccs_getPyramidPower() && c2t_hccs_thresholdMet(TEST_WEAPON))
+		return true;
+
 	//OU pizza if needed
 	if (c2t_hccs_testTurns(TEST_WEAPON) > 3)//TODO ? cost/benifit?
 		c2t_hccs_pizzaCube($effect[outer wolf&trade;]);
@@ -1779,7 +1784,9 @@ boolean c2t_hccs_preWeapon() {
 		&& c2t_hccs_testTurns(TEST_WEAPON) > 4 //4 is how much cargo would save on spell test, so may as well use here if spell is not better
 		&& have_effect($effect[rictus of yeg]) == 0
 		&& !get_property('_cargoPocketEmptied').to_boolean())
-			cli_execute("cargo item yeg's motel toothbrush");
+	{
+		cli_execute("cargo item yeg's motel toothbrush");
+	}
 	c2t_hccs_haveUse($item[yeg's motel toothbrush]);
 
 	return c2t_hccs_thresholdMet(TEST_WEAPON);
@@ -1919,6 +1926,9 @@ boolean c2t_hccs_preSpell() {
 
 	//unbreakable umbrella
 	c2t_hccs_unbreakableUmbrella("spell");
+
+	//pyramid power
+	c2t_hccs_getPyramidPower();
 
 	//prismatic beret
 	c2t_hccs_beret(
@@ -2761,5 +2771,26 @@ boolean c2t_hccs_unlockDistantWoods() {
 	}
 
 	return true;
+}
+
+boolean c2t_hccs_getPyramidPower() {
+	if (have_effect($effect[pyramid power]) > 0)
+		return true;
+	if (!(get_campground() contains $item[bricko pyramid]))
+		return false;
+	if (get_property("_pyramidRestEffectsGained").to_int() >= 3)
+		return false;
+	if (get_property("timesRested").to_int() >= total_free_rests())
+		return false;
+	//familiar juggling for bonus knucklebone
+	familiar socp = $familiar[skeleton of crimbo past];
+	familiar fam = my_familiar();
+	item eq = equipped_item($slot[familiar]);
+	if (have_familiar(socp))
+		use_familiar(socp);
+	cli_execute("camp rest free campground");
+	use_familiar(fam);
+	equip($slot[familiar],eq);
+	return have_effect($effect[pyramid power]) > 0;
 }
 
