@@ -580,12 +580,12 @@ int c2t_hccs_beret(float[modifier] modWeight,float[effect] effWeight,boolean onl
 	}
 	liba_beret_sim sim = liba_beret_simInit(modWeight,effWeight,onlyNewEffects);
 
-	/*
-	map_to_file(sim.hats,"cs_beret_sim_hats.txt");
-	map_to_file(sim.shirts,"cs_beret_sim_shirts.txt");
-	map_to_file(sim.pants,"cs_beret_sim_pants.txt");
-	map_to_file(sim.effects,"cs_beret_sim_effects.txt");
-	*/
+	if (get_property("_c2t_hccs_beretSaveStateForLaterCalcs").to_boolean()) {
+		map_to_file(sim.hats,"cs_beret_sim_hats.txt");
+		map_to_file(sim.shirts,"cs_beret_sim_shirts.txt");
+		map_to_file(sim.pants,"cs_beret_sim_pants.txt");
+		map_to_file(sim.effects,"cs_beret_sim_effects.txt");
+	}
 
 	//add pants that can be bought from NPC shops //TODO: find better way to do this
 	foreach pant in $items[
