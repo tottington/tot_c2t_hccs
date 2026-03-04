@@ -1430,7 +1430,7 @@ boolean c2t_hccs_preFamiliar() {
 	cli_execute('cast empathy');
 
 	// tot - fortune buff familiar
-	cli_execute('fortune buff familiar')
+	cli_execute('fortune buff familiar');
 
 	// Pool buff
 	c2t_hccs_getEffect($effect[billiards belligerence]);
@@ -1799,8 +1799,8 @@ boolean c2t_hccs_preWeapon() {
 	c2t_hccs_haveUse($item[yeg's motel toothbrush]);
 
 	// tot - wishes
-	cli_execute("genie effect outer wolf")
-	cli_execute("boombox fists")
+	cli_execute("genie effect outer wolf");
+	cli_execute("boombox fists");
 
 	return c2t_hccs_thresholdMet(TEST_WEAPON);
 }
