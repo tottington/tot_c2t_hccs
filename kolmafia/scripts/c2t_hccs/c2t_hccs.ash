@@ -1269,8 +1269,8 @@ boolean c2t_hccs_preHotRes() {
 	c2t_hccs_aprilShield($effect[empathy]);
 	c2t_hccs_aprilShield($effect[thoughtful empathy]);
 
-	//tot - wish for fireproof lips
-	
+	// tot - use scroll of minor invuln
+	cli_execute("use scroll of minor");
 
 	// need to run this twice because familiar weight thresholds interfere with it?
 	maximize(maxstr,false);
