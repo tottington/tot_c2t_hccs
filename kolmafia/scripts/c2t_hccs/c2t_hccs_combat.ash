@@ -142,6 +142,7 @@ void main(int initround, monster foe, string page) {
 				m = mHead + mSteal;
 				m += c2t_bb($skill[become a cloud of mist]);
 				// m += c2t_bb($skill[fire extinguisher: foam yourself]);
+				m += c2t_bb($skill[use the force]);
 				m.c2t_bbSubmit(true);
 				return;
 			}
