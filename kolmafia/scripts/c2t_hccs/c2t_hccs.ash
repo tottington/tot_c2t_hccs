@@ -1429,9 +1429,6 @@ boolean c2t_hccs_preFamiliar() {
 	// tot - cast empathy
 	cli_execute('cast empathy');
 
-	// tot - fortune buff familiar
-	cli_execute('fortune buff familiar');
-
 	// Pool buff
 	c2t_hccs_getEffect($effect[billiards belligerence]);
 
