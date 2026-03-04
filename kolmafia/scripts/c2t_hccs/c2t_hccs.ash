@@ -2053,6 +2053,9 @@ boolean c2t_hccs_preMys() {
 	c2t_hccs_aprilShield($effect[tubes of universal meat]);
 	c2t_hccs_aprilShield($effect[mariachi moisture]);
 
+	// tot - mys deck buff
+	cli_execute("play the magician");
+
 	return c2t_hccs_thresholdMet(TEST_MYS);
 }
 
@@ -2086,6 +2089,9 @@ boolean c2t_hccs_preMox() {
 
 	c2t_hccs_aprilShield($effect[slippery as a seal]);
 	c2t_hccs_aprilShield($effect[lubricating sauce]);
+
+	// tot - mox deck buff
+	cli_execute("play the fool");
 
 	return c2t_hccs_thresholdMet(TEST_MOX);
 }
