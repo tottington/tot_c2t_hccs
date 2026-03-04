@@ -2437,12 +2437,13 @@ void c2t_hccs_fights() {
 		}
 
 		//drink astral pilsners once level 11; saving 1 for use in mime army shotglass post-run
+		// tot - unfortunately I need more turns so cest la vie 6 pils
 		if (my_level() >= 11
 			&& item_amount($item[astral pilsner]) == 6)
 		{
 			cli_execute('shrug Shanty of Superiority');
 			c2t_hccs_haveUse(1,$skill[the ode to booze]);
-			drink(5,$item[astral pilsner]);
+			drink(6,$item[astral pilsner]);
 			cli_execute('shrug Ode to Booze');
 			c2t_hccs_haveUse(1,$skill[stevedave's shanty of superiority]);
 		}
