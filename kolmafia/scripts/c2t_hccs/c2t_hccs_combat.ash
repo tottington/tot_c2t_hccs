@@ -141,7 +141,7 @@ void main(int initround, monster foe, string page) {
 			if (get_property("csServicesPerformed").contains_text("Make Margaritas")) {
 				m = mHead + mSteal;
 				m += c2t_bb($skill[become a cloud of mist]);
-				m += c2t_bb($skill[fire extinguisher: foam yourself]);
+				// m += c2t_bb($skill[fire extinguisher: foam yourself]);
 				m.c2t_bbSubmit(true);
 				return;
 			}
