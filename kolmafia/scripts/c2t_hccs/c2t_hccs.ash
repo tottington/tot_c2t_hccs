@@ -1893,8 +1893,12 @@ boolean c2t_hccs_preSpell() {
 		ensure_song($effect[elron's explosive etude]);
 
 	// cargo pocket
-	if (available_amount($item[cargo cultist shorts]) > 0 && have_effect($effect[sigils of yeg]) == 0 && !get_property('_cargoPocketEmptied').to_boolean())
-		cli_execute("cargo item Yeg's Motel hand soap");
+	//if (available_amount($item[cargo cultist shorts]) > 0 && have_effect($effect[sigils of yeg]) == 0 && !get_property('_cargoPocketEmptied').to_boolean())
+		//cli_execute("cargo item Yeg's Motel hand soap");
+	//c2t_hccs_haveUse($item[yeg's motel hand soap]);
+
+	// tot - cargo pocket
+	cli_execute("cargo 177");
 	c2t_hccs_haveUse($item[yeg's motel hand soap]);
 
 	// meteor lore // moxie can't do this, as it wastes a saber on evil olive -- moxie should be able to do this now with nostalgia earlier?
