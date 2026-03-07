@@ -1273,6 +1273,9 @@ boolean c2t_hccs_preHotRes() {
 	if (available_amount($item[scroll of minor invulnerability]) > 0)
 		cli_execute("use scroll of minor");
 
+	// tot - cast pals
+	c2t_hccs_getEffect($effect[Best Pals]);
+
 	// need to run this twice because familiar weight thresholds interfere with it?
 	maximize(maxstr,false);
 	maximize(maxstr,false);
