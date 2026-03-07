@@ -1270,7 +1270,8 @@ boolean c2t_hccs_preHotRes() {
 	c2t_hccs_aprilShield($effect[thoughtful empathy]);
 
 	// tot - use scroll of minor invuln
-	cli_execute("use scroll of minor");
+	if (available_amount($item[scroll of minor invulnerability]) > 0)
+		cli_execute("use scroll of minor");
 
 	// need to run this twice because familiar weight thresholds interfere with it?
 	maximize(maxstr,false);
