@@ -1936,8 +1936,8 @@ boolean c2t_hccs_preSpell() {
 	}
 
 	//tot - blow all the resources
-	c2t_hccs_genie($effect[witch breaded]);
-	c2t_hccs_genie($effect[sparkly]);
+	c2t_hccs_monkeyPaw($effect[witch breaded]);
+	c2t_hccs_monkeyPaw($effect[sparkly]);
 
 	//briefcase //TODO count spell-damage-providing accessories and values before deciding to use the briefcase
 	c2t_hccs_briefcase("spell");
