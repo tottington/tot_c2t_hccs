@@ -142,31 +142,29 @@ int c2t_hccs_freeKillsLeft() {
 }
 
 boolean c2t_hccs_getEffect(effect eff) {
-	if (have_effect(eff).to_boolean())
+	if (have_effect(eff) > 0)
 		return true;
 
 	string cmd = eff.default;
-	string tmp;
 	skill ski;
 	item ite;
-	string [int] spl;
 
-	if (cmd.starts_with("cargo "))
-		foreach x in eff.all
-			if (!x.starts_with("cargo ")) {
-				cmd = x;
-				break;
-			}
+	if (cmd.starts_with("cargo ")) foreach x in eff.all if (!x.starts_with("cargo ")) {
+		cmd = x;
+		break;
+	}
 	if (cmd.starts_with("cargo ")) {
 		c2t_hccs_printWarn(`aborted an attempt to use cargo shorts for {eff}`);
 		return false;
 	}
 
 	if (cmd.starts_with("cast ")) {
-		spl = cmd.split_string(" ");
-		for i from 2 to spl.count()-1
-			tmp += i == 2?spl[i]:` {spl[i]}`;
-		ski = tmp.to_skill();
+		matcher m = create_matcher("cast 1 ([^\\^]*)",cmd);
+		if (!m.find()) {
+			c2t_hccs_printWarn(`something broke and couldn't get "{eff}"`);
+			return false;
+		}
+		ski = m.group(1).to_skill();
 
 		//need hp to cast blood skills
 		if ($skills[blood bond,blood bubble,blood frenzy] contains ski)
@@ -178,17 +176,18 @@ boolean c2t_hccs_getEffect(effect eff) {
 		}
 	}
 	else if (cmd.starts_with("use ")) {
-		spl = cmd.split_string(" ");
-
 		//short circuit until i figure out how to deal with this
-		if (spl[1] == "either") {
+		if (cmd.starts_with("use either ")) {
 			cli_execute(cmd);
-			return have_effect(eff).to_boolean();
+			return have_effect(eff) > 0;
 		}
 
-		for i from 2 to spl.count()-1
-			tmp += i == 2?spl[i]:` {spl[i]}`;
-		ite = tmp.to_item();
+		matcher m = create_matcher("use 1 (.*)",cmd);
+		if (!m.find()) {
+			c2t_hccs_printWarn(`something broke and couldn't get "{eff}"`);
+			return false;
+		}
+		ite = m.group(1).to_item();
 
 		if (!retrieve_item(ite)) {
 			c2t_hccs_printInfo(`Info: "{ite}" not retrieved to get "{eff}"`);
@@ -199,7 +198,7 @@ boolean c2t_hccs_getEffect(effect eff) {
 	else //probably disabling this part in the future
 		cli_execute(cmd);
 
-	return have_effect(eff).to_boolean();
+	return have_effect(eff) > 0;
 }
 
 void c2t_hccs_getEffect(boolean [effect] effs) {

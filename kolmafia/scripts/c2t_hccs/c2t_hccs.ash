@@ -1133,8 +1133,12 @@ boolean c2t_hccs_preItem() {
 	}
 
 	//spice ghost
-	if (my_class() != $class[pastamancer])
-		c2t_hccs_getEffect($effect[spice haze]);
+	if (my_class() != $class[pastamancer]) {
+		if (available_amount($item[legendary pasta wand]) > 0)
+			c2t_hccs_getEffect($effect[legendary spice haze]);
+		else
+			c2t_hccs_getEffect($effect[spice haze]);
+	}
 
 	c2t_hccs_getEffect($effects[
 		who's going to pay this drunken sailor?,//shanty
