@@ -47,6 +47,9 @@ boolean c2t_hccs_haveUse(int n,skill ski);
 //returns whether a cleaver adventure is now or not
 boolean c2t_hccs_isCleaverNow();
 
+//return whether user set the preference to disable something
+boolean c2t_hccs_isDisabled(string shortPrefName);
+
 //joinclan
 //mostly a wrapper for c2t_joinClan()
 boolean c2t_hccs_joinClan(string s);
@@ -246,6 +249,10 @@ boolean c2t_hccs_haveUse(int n,skill ski) {
 
 boolean c2t_hccs_isCleaverNow() {
 	return get_property("_juneCleaverFightsLeft").to_int() <= 0;
+}
+
+boolean c2t_hccs_isDisabled(string shortPrefName) {
+	return get_property(`c2t_hccs_disable.{shortPrefName}`).to_boolean();
 }
 
 boolean c2t_hccs_joinClan(string s) {

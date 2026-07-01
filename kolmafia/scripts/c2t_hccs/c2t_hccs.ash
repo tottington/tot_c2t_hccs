@@ -924,8 +924,11 @@ boolean c2t_hccs_allTheBuffs() {
 		cli_execute('shrug ode to booze');
 	
 	//fortune buff item
-	if (get_property('_clanFortuneBuffUsed') == 'false')
+	if (!get_property('_clanFortuneBuffUsed').to_boolean()
+		&& !c2t_hccs_isDisabled('vipFortuneBuff'))
+	{
 		c2t_hccs_getEffect($effect[there's no n in love]);
+	}
 
 	//cast triple size
 	if (available_amount($item[powerful glove]) > 0 && have_effect($effect[triple-sized]) == 0 && !c2t_cast($skill[cheat code: triple size]))
