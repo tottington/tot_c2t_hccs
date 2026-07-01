@@ -391,7 +391,9 @@ boolean c2t_hccs_testDone(int test) {
 void c2t_hccs_doTest(int test) {
 	if (!c2t_hccs_testDone(test)) {
 		visit_url('council.php');
-		visit_url('choice.php?pwd&whichchoice=1089&option='+test,true,true);
+		string e;
+		if ("" != e = catch visit_url('choice.php?pwd&whichchoice=1089&option='+test,true,true))
+			c2t_hccs_printInfo(e);
 		c2t_assert(c2t_hccs_testDone(test),`Failed to do test {test}. Out of turns?`);
 	}
 	else
