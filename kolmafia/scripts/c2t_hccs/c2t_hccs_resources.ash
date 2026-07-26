@@ -1275,6 +1275,8 @@ boolean c2t_hccs_sweetSynthesis(effect eff) {
 			return false;
 
 		case $effect[synthesis: collection]://item
+			if (c2t_hccs_isDisabled('synthesisItem'))
+				return false;
 			if (!c2t_hccs_gardenPeppermint())
 				return false;
 			it1 = $item[peppermint sprout];

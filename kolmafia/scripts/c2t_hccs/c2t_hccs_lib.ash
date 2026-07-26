@@ -47,6 +47,9 @@ boolean c2t_hccs_haveUse(int n,skill ski);
 //returns whether a cleaver adventure is now or not
 boolean c2t_hccs_isCleaverNow();
 
+//return whether user set the preference to disable something
+boolean c2t_hccs_isDisabled(string shortPrefName);
+
 //joinclan
 //mostly a wrapper for c2t_joinClan()
 boolean c2t_hccs_joinClan(string s);
@@ -248,6 +251,10 @@ boolean c2t_hccs_isCleaverNow() {
 	return get_property("_juneCleaverFightsLeft").to_int() <= 0;
 }
 
+boolean c2t_hccs_isDisabled(string shortPrefName) {
+	return get_property(`c2t_hccs_disable.{shortPrefName}`).to_boolean();
+}
+
 boolean c2t_hccs_joinClan(string s) {
 	string err = `Error: could not join clan "{s}"`;
 	if (s.to_int() != 0)
@@ -384,7 +391,9 @@ boolean c2t_hccs_testDone(int test) {
 void c2t_hccs_doTest(int test) {
 	if (!c2t_hccs_testDone(test)) {
 		visit_url('council.php');
-		visit_url('choice.php?pwd&whichchoice=1089&option='+test,true,true);
+		string e;
+		if ("" != e = catch visit_url('choice.php?pwd&whichchoice=1089&option='+test,true,true))
+			c2t_hccs_printInfo(e);
 		c2t_assert(c2t_hccs_testDone(test),`Failed to do test {test}. Out of turns?`);
 	}
 	else
