@@ -1501,6 +1501,11 @@ boolean c2t_hccs_preFamiliar() {
 	//heartstone
 	c2t_hccs_heartstone($effect[best pals]);
 
+	//august scepter: Offhand Remarkable doubles the off-hand's enchantments, and the
+	//off-hand here carries familiar weight. cast before maximizing so the maximizer can
+	//see it. the scepter allows 5 casts a day and nothing else in the run spends any.
+	c2t_hccs_getEffect($effect[offhand remarkable]);
+
 	maximize(maxstr,false);
 	if (c2t_hccs_thresholdMet(TEST_FAMILIAR))
 		return true;
@@ -1796,6 +1801,15 @@ boolean c2t_hccs_preWeapon() {
 	if (c2t_hccs_thresholdMet(TEST_WEAPON))
 		return true;
 
+	// tot - wishes
+	//these have to land before the cargo check below. that guard weighs the weapon test
+	//against what the pocket would save on the spell test, so it needs to see the
+	//finished weapon stack. run after, it reads high and spends the once-a-day pocket on
+	//rictus of yeg for a test that is already sitting at its floor, and the spell test
+	//loses sigils of yeg (+200% spell damage) for nothing.
+	cli_execute("genie effect outer wolf");
+	cli_execute("boombox fists");
+
 	//cargo shorts as backup
 	if (available_amount($item[cargo cultist shorts]) > 0
 		&& c2t_hccs_testTurns(TEST_WEAPON) > 4 //4 is how much cargo would save on spell test, so may as well use here if spell is not better
@@ -1805,10 +1819,6 @@ boolean c2t_hccs_preWeapon() {
 		cli_execute("cargo item yeg's motel toothbrush");
 	}
 	c2t_hccs_haveUse($item[yeg's motel toothbrush]);
-
-	// tot - wishes
-	cli_execute("genie effect outer wolf");
-	cli_execute("boombox fists");
 
 	return c2t_hccs_thresholdMet(TEST_WEAPON);
 }
