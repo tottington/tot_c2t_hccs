@@ -105,6 +105,9 @@ void main(int initround, monster foe, string page) {
 		if (foe == $monster[fluffy bunny]) {
 			m += c2t_bb($skill[become a cloud of mist]);
 			m += c2t_bb($skill[fire extinguisher: foam yourself]);
+			//neither of the above ends the fight; without an extinguisher there's no
+			//fireproof foam suit to trip the saber force check at the top of main
+			m += c2t_bb($skill[use the force]);
 			m.c2t_bbSubmit(true);
 		}
 		else if (foe == $monster[government agent])
